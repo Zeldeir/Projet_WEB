@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="style.css"/>
+        <title id="title_login">Bienvenue sur le meilleur Chat du monde!</title>
+    </head>
+    <body>
+
+        <div>
+            <h2>Nom d'utilisateur : </h2>
+            <input type="text" name="pseudo" id="pseudonyme" value=" "/>
+            <input type="button" class="register_button" value="Valider" onclick="test()">
+            <h3 id="user">User : </h3>
+
+        </div>    
+        <h2>Mot de passe : </h2>
+        <input type="password" name="mdp"/>
+
+        
+        <script language="javascript">
+
+            function test(){
+                pseudo = document.getElementsById("pseudonyme");
+                test_user = document.getElementById("user");
+
+                console.log(pseudo);
+                
+                test_user.innerHTML += pseudo.value;
+            }
+
+        </script>
+
+
+    </body>
+</html>
