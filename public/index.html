@@ -2,32 +2,50 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="styles/style.css"/>
         <title id="title_login">Bienvenue sur le meilleur Chat du monde!</title>
     </head>
-    <body>
+    <body onload="reset();">
+        <div id = "login_div">
+            
+            <h1 id="login">Connectez-vous</h1>
 
-        <div>
-            <h2>Nom d'utilisateur : </h2>
-            <input type="text" name="pseudo" id="pseudonyme" value=" "/>
-            <input type="button" class="register_button" value="Valider" onclick="test()">
-            <h3 id="user">User : </h3>
+            <img src="Images/login2.png" alt="login_icon" id="login_icon"/>
 
-        </div>    
-        <h2>Mot de passe : </h2>
-        <input type="password" name="mdp"/>
+            <input type="text" class="input" id="pseudonyme" placeholder="Pseudonyme...">
+               
+            <input type="password" class="input" id="mdp" placeholder="Mot de passe..."/>
+            
+            <input type="button" id="button_valider" value="LOGIN" onclick="test();"></button>
 
-        
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="socket.io/socket.io.js"></script>
         <script language="javascript">
 
-            function test(){
-                pseudo = document.getElementsById("pseudonyme");
-                test_user = document.getElementById("user");
-
-                console.log(pseudo);
-                
-                test_user.innerHTML += pseudo.value;
+            var socket = io.connect('http://localhost:8080');
+            
+            function reset(){
+                document.getElementById('pseudonyme').value = "";
+                document.getElementById('password').value = "";
             }
+            
+            function test(){
+                    pseudo = document.getElementById("pseudonyme").value;
+                    password = document.getElementById("mdp").value;
+
+                    document.getElementById('user').innerHTML += pseudo;
+                    document.getElementById('pw').innerHTML += password;
+            }
+
+
+            socket.on('connect', function(){
+                
+                console.log("test");
+
+                
+            })
 
         </script>
 
