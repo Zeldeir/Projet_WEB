@@ -15,9 +15,7 @@
                 </div>
 
                 <div id = "left_salons">
-                    <div id="Salons">
-                        <h3>Salons</h3>
-                    </div>
+                    <button type = "button" id="Salons" onclick= "setRoom()">Room-1</button>
                 </div>
 
                 <div id = "left_user">
@@ -69,6 +67,12 @@
 
             const messageInput = document.getElementById('mid_input');
             const roomInput = document.getElementById('mid_input_room');
+
+            function setRoom()
+            {
+                roomInput.value = 'Room-1';
+                joinRoom();
+            }
 
             function buttonPressed()
             {
