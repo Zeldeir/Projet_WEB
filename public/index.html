@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<script src="socket.io/socket.io.js"></script>
 
 <html>
     <head>
@@ -37,13 +38,13 @@
                 <div id = "mid_box_bottom">
                     <div id = "mid_send_container">
                         <input type="text" placeholder="Envoyer un message" id = "mid_input">
-                        <button type = "button" onclick = "displayMessage(document.getElementById('mid_input').value)" id = "mid_send">
+                        <button type = 'submit' id = "mid_send" onclick="buttonPressed()">
                             <img src="../Images/send_white.png" alt="Send" title="Send" class="image" width=100% height=100%/>
                     </div>
                     
                     <div id = mid_room_container>
                         <input type=""text placeholder="Choisir un salon" id="mid_input_room">
-                        <button type="button" onclick="sendMessage(document.getElementById('mid_input_room').value)" id="mid_send_room">
+                        <button type="button" id="mid_send_room" onclick="joinRoom()">
                             <img src="../Images/send_white.png" alt="Send" title="Send" class="image" width=100% height=100%/>
                     </div>
                 </div>
@@ -59,11 +60,31 @@
 
             socket.on('connect', function(){
                 console.log('connect');
-                displayMessage('You connected with id : ${socket.id}');
+                displayMessage('You connected with id : ' + socket.id);
+            });
+
+            socket.on('receive-message', function(message){
+                displayMessage(message);
             });
 
             const messageInput = document.getElementById('mid_input');
             const roomInput = document.getElementById('mid_input_room');
+
+            function buttonPressed()
+            {
+                const message = messageInput.value;
+                const room = roomInput.value;
+                socket.emit('send-message', message, room);
+                displayMessage(message);
+                messageInput.value = '';
+            }
+
+            function joinRoom()
+            {
+                const room = roomInput.value;
+                displayMessage('You joined room : ' + room);
+                socket.emit('join-room', room);
+            }
 
            function displayMessage(message)
            {
@@ -77,9 +98,6 @@
                 alert(message);
             }
 
-            
-
         </script>
     </body>
-
 </html>
