@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="styles/style_register.css"/>
+        <title id="title_login">Créer un compte</title>
+    </head>
+    <body onload="reset();">
+        
+        <div id = "register_div">
+            
+            <h1 id="register">Créer un compte</h1>
+
+            <img src="Images/register.png" alt="register_icon" id="register_icon"/>
+
+            <input type="text" class="input" id="pseudonyme" placeholder="Pseudonyme...">
+               
+            <input type="password" class="input" id="mdp" placeholder="Mot de passe..."/>
+            
+            <h3 id="choice_avatar">Choisissez votre avatar :</h3>
+            <div id="avatars">
+                <div id="avatar_1" onclick='select("avatar_1");'>
+                    <img src="Images/avatar_1.png" alt="avatar1" id="avatar1"/>
+                </div>
+                <div id="avatar_2" onclick='select("avatar_2");'>
+                    <img src="Images/avatar_2.png" alt="avatar1" id="avatar2"/>
+                </div>
+                <div id="avatar_3" onclick='select("avatar_3");'>
+                    <img src="Images/avatar_3.png" alt="avatar1" id="avatar3"/>
+                </div>
+                <div id="avatar_4" onclick='select("avatar_4");'>
+                    <img src="Images/avatar_4.png" alt="avatar1" id="avatar4"/>
+                </div>
+                <div id="avatar_5" onclick='select("avatar_5");'>
+                    <img src="Images/avatar_5.png" alt="avatar1" id="avatar5"/>
+                </div>
+            </div>
+            
+            <input type="button" id="button_valider" value="CRÉER" onclick="socket.emit('create_user');"></button>
+
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="socket.io/socket.io.js"></script>
+        <script language="javascript">
+            var socket = io.connect('http://localhost:8080');
+            var selected_avatar;
+
+            function select(id){
+                    document.getElementById('avatar_1').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_2').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_3').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_4').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_5').style.backgroundColor = "whitesmoke";
+
+                    document.getElementById(id).style.backgroundColor = "blue";
+
+                    selected_avatar = id;
+                }
+
+            function reset(){
+                    
+                    document.getElementById('pseudonyme').value = "";
+                    
+                    document.getElementById('mdp').value = "";
+                    
+                    avatars = document.getElementsByClassName('avatar_circle');
+                    document.getElementById('avatar_1').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_2').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_3').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_4').style.backgroundColor = "whitesmoke";
+                    document.getElementById('avatar_5').style.backgroundColor = "whitesmoke";
+                    selected_avatar = '';
+                }
+
+            function error(){
+                    if(pseudo == ''){
+                        alert('Veuillez taper un pseudonyme.');
+                    }
+                    else if(mdp == ''){
+                        alert('Veuillez taper un mot de passe.');
+                    }
+                    else if(selected_avatar == ''){
+                        alert('Veuillez choisir un avatar.');
+                    }
+                }
+
+
+            socket.on('connect', function(){
+                console.log("test");
+            
+            socket.on('already_exist', function(new_user){
+                alert('Le pseudo ' + new_user + ' existe déjà!');
+            })
+                
+            socket.on('reset', function(){
+                console.log("reset");
+                reset();
+            })
+                       
+            socket.on('register', function(){
+                    var user;
+                    console.log('in register');
+                    mdp = document.getElementById('mdp').value;
+                    pseudo = document.getElementById('pseudonyme').value;
+
+                    if(mdp == '' || pseudo == '' || selected_avatar == ''){
+                        error();
+                    }
+                    else{
+                        user = {
+                            pseudonyme: pseudo,
+                            mdp: mdp,
+                            avatar: selected_avatar,
+                        };
+                        socket.emit('new_user', user);
+                    }
+                });
+
+                socket.on('logged_in', function(){
+                    location.href = "test_login.html";
+                })
+            });
+
+
+
+        </script>
+    </body>
+
+    
+</html>
