@@ -83,6 +83,14 @@
                 messageInput.value = '';
             }
 
+            function privateMessage()
+            {
+                const room = roomInput.value;
+                displayMessage('You are now talking to : ' + room);
+                
+                socket.emit('join-room', room);
+            }
+
             function joinRoom()
             {
                 const room = roomInput.value;
