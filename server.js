@@ -34,6 +34,8 @@ io.sockets.on('connection', function(socket){
         console.log("Un client s'est déconnecté!");
     })
 
+
+    //fonctions register/login
     socket.on('create_user', function(){
         socket.emit('register');
     })
@@ -116,6 +118,21 @@ io.sockets.on('connection', function(socket){
             }
         }
     })
+
+    //fonctions chat
+    socket.on('send-message', function(message, room){
+        console.log("Message reçu: ", message);
+        if(room){
+            socket.to(room).emit('receive-message', message);
+        }
+        else{
+            socket.broadcast.emit('receive-message', message);
+        }
+    });
+
+    socket.on('join-room', function(room){
+        socket.join(room);
+    });
     
 })
 
