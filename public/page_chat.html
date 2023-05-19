@@ -15,7 +15,7 @@
                 </div>
 
                 <div id = "left_salons">
-                    <button type = "button" id="Salons" onclick= "setRoom()">Room-1</button>
+                    <button type = "button" id="Salons" onclick= "setRoom('test')">Room-1</button>
                 </div>
 
                 <div id = "left_user">
@@ -42,8 +42,8 @@
                     </div>
                     
                     <div id = mid_room_container>
-                        <input type=""text placeholder="Choisir un salon" id="mid_input_room">
-                        <button type="button" id="mid_send_room" onclick="joinRoom()">
+                        <input type=""text placeholder="Choisir un utilisateur" id="mid_input_room">
+                        <button type="button" id="mid_send_room" onclick="privateMessage()">
                             <img src="../Images/send_white.png" alt="Send" title="Send" class="image" width=100% height=100%/>
                     </div>
                 </div>
@@ -78,6 +78,7 @@
 
             const messageInput = document.getElementById('mid_input');
             const roomInput = document.getElementById('mid_input_room');
+            var roomName = '';
             
             function getAvatar(avatar_id){
                 switch(avatar_id){
@@ -89,16 +90,16 @@
                 }
             }
 
-            function setRoom()
+            function setRoom(name)
             {
-                roomInput.value = 'Room-1';
+                roomName = name;
                 joinRoom();
             }
 
             function buttonPressed()
             {
                 const message = messageInput.value;
-                const room = roomInput.value;
+                const room = roomName;
                 socket.emit('send-message', message, room);
                 displayMessage(message);
                 messageInput.value = '';
@@ -107,14 +108,20 @@
             function privateMessage()
             {
                 const room = roomInput.value;
-                displayMessage('You are now talking to : ' + room);
-                
-                socket.emit('join-room', room);
+                if(room)
+                {
+                    displayMessage('You are now talking to : ' + room);
+                    socket.emit('join-room', room);
+                }
+                else{
+                    displayMessage('You are now talking to : Everyone');
+                    socket.emit('leave-room', roomName);
+                }
             }
 
             function joinRoom()
             {
-                const room = roomInput.value;
+                const room = roomName;
                 displayMessage('You joined room : ' + room);
                 socket.emit('join-room', room);
             }

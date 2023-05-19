@@ -139,6 +139,10 @@ io.sockets.on('connection', function(socket){
         socket.join(room);
     });
 
+    socket.on('leave-room', function(room)
+    {
+        socket.leave(room);
+    });
     
 })
 
