@@ -1,0 +1,179 @@
+html{
+    height: 100%;
+}
+
+body{
+    background-image: linear-gradient(to bottom right, violet, blue);
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+}
+
+#register_div{
+    background-color: rgba(255, 255, 255, 0.075);
+    border-radius: 20px;
+    width: 500px;
+    height: 700px;
+    margin-left: 30%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    display: block;
+}
+
+#register_icon{
+    width: 30%;
+    margin-left: 37%;
+}
+
+#register{
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 15%;
+    margin-left: 26%;
+    display: inline-block;
+}
+
+.input{
+    border-radius: 15px;
+    margin-top: 10%;
+    margin-left: 15%;
+    height: 50px;
+    width: 350px;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+
+#pseudonyme{
+    margin-top: 5%;
+}
+
+#button_valider{
+    margin-top: 5%;
+    margin-left: 26%;
+    height: 50px;
+    width: 250px;
+    background-color: rgba(199, 8, 180, 0.785);
+    border-radius: 15px;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#button_valider:hover{
+    background-color:rgba(199, 8, 180, 0.434);
+}
+
+#button_valider:active{
+    background-color:rgba(247, 41, 226, 0.781);
+}
+
+#choice_avatar{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(245, 245, 245, 0.405);
+    text-align: center;
+}
+
+#avatars{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#avatar_1{
+    background-color: whitesmoke;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+#avatar_1 img{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+#avatar_2{
+    background-color: whitesmoke;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+#avatar_2 img{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+#avatar_3{
+    background-color: whitesmoke;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+#avatar_3 img{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+#avatar_4{
+    background-color: whitesmoke;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+#avatar_4 img{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+#avatar_5{
+    background-color: whitesmoke;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin:auto;
+    text-align: center;
+}
+
+#avatar_5 img{
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+
