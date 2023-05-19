@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="style_page1.css"/>
+        <link rel="stylesheet" href="styles/style_chat.css"/>
         <title id="title_chat">Chat</title>
     </head>
     <body>
@@ -19,7 +19,8 @@
                 </div>
 
                 <div id = "left_user">
-                    <h3>Utilisateurs</h3>
+                    <h3 id="current_user_pseudo">Utilisateurs</h3>
+                    <img src="" id="current_user_avatar">
                 </div>
             </div>
 
@@ -59,14 +60,34 @@
             socket.on('connect', function(){
                 console.log('connect');
                 displayMessage('You connected with id : ' + socket.id);
+                socket.emit('get_infos');
+                console.log(socket.pseudonyme);
             });
 
             socket.on('receive-message', function(message){
                 displayMessage(message);
             });
 
+            socket.on('receive_infos', function(user){
+                console.log(user)
+                document.getElementById('current_user_pseudo').innerHTML = user.pseudonyme;
+                avatar = getAvatar(user.avatar);
+
+                document.getElementById('current_user_avatar').src = avatar;
+            })
+
             const messageInput = document.getElementById('mid_input');
             const roomInput = document.getElementById('mid_input_room');
+            
+            function getAvatar(avatar_id){
+                switch(avatar_id){
+                    case 'avatar_1': return "./Images/avatar_1.png"; break;
+                    case 'avatar_2': return "./Images/avatar_2.png"; break;
+                    case 'avatar_3': return "./Images/avatar_3.png"; break;
+                    case 'avatar_4': return "./Images/avatar_4.png"; break;
+                    default: return "./Images/avatar_5.png"; break;
+                }
+            }
 
             function setRoom()
             {

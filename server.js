@@ -2,6 +2,7 @@ var express = require('express');
 var serve_static = require('serve-static');
 var http = require('http');
 const fs = require('fs');
+const { test } = require('node:test');
 
 var app = express();
 
@@ -27,6 +28,7 @@ function check_exist(user, data){
 }
 
 io.sockets.on('connection', function(socket){
+    
 
     console.log("Un client s'est connecté!");
     
@@ -108,6 +110,9 @@ io.sockets.on('connection', function(socket){
             });
 
             if(isOK == true){
+                socket.pseudonyme = test_login.pseudonyme;
+                socket.mdp = test_login.mdp;
+                socket.avatar = test_login.avatar;
                 socket.emit('login');
             }
             else if(isOK == false && ispseudoOK == true){
@@ -133,6 +138,7 @@ io.sockets.on('connection', function(socket){
     socket.on('join-room', function(room){
         socket.join(room);
     });
+
     
 })
 
